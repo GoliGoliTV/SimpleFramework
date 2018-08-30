@@ -1,10 +1,8 @@
 <?php
 
-/**
- * SimpleFramework
- * The fast, light-weighted, easy-to-extend php framework.
+/*
  *
- * Some classes are based on project PocketMine-MP.
+ * SimpleFramework
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +11,7 @@
  *
  * @author iTXTech
  * @link https://itxtech.org
+ *
  */
 
 /**
@@ -21,11 +20,9 @@
 namespace iTXTech\SimpleFramework\Scheduler;
 
 use iTXTech\SimpleFramework\Console\Logger;
-use iTXTech\SimpleFramework\Framework;
 use iTXTech\SimpleFramework\Util\ReversePriorityQueue;
 
 class ServerScheduler{
-	public static $WORKERS = 2;
 	/**
 	 * @var ReversePriorityQueue<Task>
 	 */
@@ -47,13 +44,17 @@ class ServerScheduler{
 
 	private static $singleThread = false;
 
-	public function __construct(){
+	public function __construct(\ClassLoader $classLoader, OnCompletionListener $listener, int $workers){
 		$this->queue = new ReversePriorityQueue();
 		if(\iTXTech\SimpleFramework\SINGLE_THREAD){
 			self::$singleThread = true;
 		}else{
-			$this->asyncPool = new AsyncPool(Framework::getInstance(), self::$WORKERS);
+			$this->asyncPool = new AsyncPool($classLoader, $listener, $workers);
 		}
+	}
+
+	public function getAsyncPool(): AsyncPool{
+		return $this->asyncPool;
 	}
 
 	/**

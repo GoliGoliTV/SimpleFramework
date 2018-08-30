@@ -1,10 +1,8 @@
 <?php
 
-/**
- * SimpleFramework
- * The fast, light-weighted, easy-to-extend php framework.
+/*
  *
- * Some classes are based on project PocketMine-MP.
+ * SimpleFramework
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +11,7 @@
  *
  * @author iTXTech
  * @link https://itxtech.org
+ *
  */
 
 namespace iTXTech\SimpleFramework\Console\Command;
@@ -38,7 +37,7 @@ class UnpackModuleCommand implements Command{
 
 	public function execute(string $command, array $args) : bool{
 		$moduleName = trim(implode(" ", $args));
-		if($moduleName === "" or !(($module = Framework::getInstance()->getModule($moduleName)) instanceof Module)){
+		if($moduleName === "" or !(($module = Framework::getInstance()->getModuleManager()->getModule($moduleName)) instanceof Module)){
 			Logger::info(TextFormat::RED . "Invalid module name, check the name case.");
 			return true;
 		}
@@ -49,7 +48,7 @@ class UnpackModuleCommand implements Command{
 			return true;
 		}
 
-		$outputDir = Framework::getInstance()->getModuleDataPath() . "module" . DIRECTORY_SEPARATOR;
+		$outputDir = Framework::getInstance()->getModuleManager()->getModuleDataPath() . "module" . DIRECTORY_SEPARATOR;
 		$folderPath = $outputDir . $info->getName() . "_v" . $info->getVersion() . DIRECTORY_SEPARATOR;
 		if(file_exists($folderPath)){
 			Logger::info("Module files already exist, overwriting...");

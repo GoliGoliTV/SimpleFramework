@@ -1,10 +1,8 @@
 <?php
 
-/**
- * SimpleFramework
- * The fast, light-weighted, easy-to-extend php framework.
+/*
  *
- * Some classes are based on project PocketMine-MP.
+ * SimpleFramework
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +11,7 @@
  *
  * @author iTXTech
  * @link https://itxtech.org
+ *
  */
 
 namespace iTXTech\SimpleFramework\Module;
@@ -20,24 +19,26 @@ namespace iTXTech\SimpleFramework\Module;
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Framework;
 
-//Multi-thread is recommended for module design.
 abstract class Module{
 	/** @var Framework */
 	protected $framework;
-	private $loaded = false;
 
 	/** @var ModuleInfo */
 	private $info;
 
+	/** @var ModuleManager */
+	private $manager;
+
 	private $file;
-
 	private $dataFolder;
+	private $loaded = false;
 
-	public final function __construct(Framework $framework, ModuleInfo $info, string $file){
+	public final function __construct(ModuleManager $manager, ModuleInfo $info, string $file){
 		$this->file = $file . DIRECTORY_SEPARATOR;
-		$this->framework = $framework;
+		$this->manager = $manager;
+		$this->framework = Framework::getInstance();
 		$this->info = $info;
-		$this->dataFolder = $framework->getModuleDataPath() . $info->getName() . DIRECTORY_SEPARATOR;
+		$this->dataFolder = $manager->getModuleDataPath() . $info->getName() . DIRECTORY_SEPARATOR;
 	}
 
 	public function getDataFolder(): string{
@@ -57,12 +58,12 @@ abstract class Module{
 			Logger::error("Module requires API Level: " . $this->info->getAPILevel() . " Current API Level: " . Framework::API_LEVEL);
 			return false;
 		}
-		return (($resolver = $this->framework->getModuleDependencyResolver()) instanceof ModuleDependencyResolver) ?
+		return (($resolver = $this->manager->getModuleDependencyResolver()) instanceof ModuleDependencyResolver) ?
 			$resolver->resolveDependency($this) : $this->checkDependency();
 	}
 
 	protected function checkDependency(){
-		$dependencies = $this->info->getDependency();
+		$dependencies = $this->info->getDependencies();
 		foreach($dependencies as $dependency){
 			$name = $dependency["name"];
 			if(strstr($name, "/")){
@@ -74,7 +75,7 @@ abstract class Module{
 			if(count($version) != 3){
 				$error = true;
 			}
-			if(($module = $this->framework->getModule($name)) instanceof Module){
+			if(($module = $this->manager->getModule($name)) instanceof Module){
 				$targetVersion = explode(".", $module->getInfo()->getVersion());
 				if(count($targetVersion) != 3){
 					$error = true;

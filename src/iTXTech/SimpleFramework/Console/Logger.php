@@ -1,10 +1,8 @@
 <?php
 
-/**
- * SimpleFramework
- * The fast, light-weighted, easy-to-extend php framework.
+/*
  *
- * Some classes are based on project PocketMine-MP.
+ * SimpleFramework
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,9 +11,12 @@
  *
  * @author iTXTech
  * @link https://itxtech.org
+ *
  */
 
 namespace iTXTech\SimpleFramework\Console;
+
+use iTXTech\SimpleFramework\Util\Util;
 
 class Logger{
 	const EMERGENCY = "emergency";
@@ -108,7 +109,7 @@ class Logger{
 			$errstr = substr($errstr, 0, $pos);
 		}
 		self::log($type, get_class($e) . ": \"$errstr\" ($errno) in \"$errfile\" at line $errline");
-		foreach(\iTXTech\SimpleFramework\getTrace(0, $trace) as $i => $line){
+		foreach(Util::getTrace(0, $trace) as $i => $line){
 			self::debug($line);
 		}
 	}

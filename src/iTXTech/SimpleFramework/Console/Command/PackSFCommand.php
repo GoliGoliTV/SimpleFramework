@@ -1,10 +1,8 @@
 <?php
 
-/**
- * SimpleFramework
- * The fast, light-weighted, easy-to-extend php framework.
+/*
  *
- * Some classes are based on project PocketMine-MP.
+ * SimpleFramework
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +11,7 @@
  *
  * @author iTXTech
  * @link https://itxtech.org
+ *
  */
 
 namespace iTXTech\SimpleFramework\Console\Command;
@@ -34,7 +33,7 @@ class PackSFCommand implements Command{
 	}
 
 	public function execute(string $command, array $args) : bool{
-		$outputDir = Framework::getInstance()->getModuleDataPath() . "module" . DIRECTORY_SEPARATOR;
+		$outputDir = Framework::getInstance()->getModuleManager()->getModuleDataPath() . "module" . DIRECTORY_SEPARATOR;
 		@mkdir($outputDir);
 		$framework = Framework::getInstance();
 		$pharPath = $outputDir . $framework->getName() . "_" . $framework->getVersion() . ".phar";

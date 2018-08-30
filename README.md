@@ -1,32 +1,35 @@
 SimpleFramework
 ===================
-__The fast, light-weighted, easy-to-extend php command line framework__
+[![License](https://img.shields.io/github/license/iTXTech/SimpleFramework.svg)](https://github.com/iTXTech/SimpleFramework/blob/master/LICENSE)
+[![Stable](https://img.shields.io/badge/stable-2.0.1(5)-brightgreen.svg)](https://github.com/iTXTech/SimpleFramework/blob/11b97f52f33db05c51769c18dbb1369faf118a52/src/iTXTech/SimpleFramework/Framework.php)
+[![Developing](https://img.shields.io/badge/dev-2.1.0(6)-blue.svg)](https://github.com/iTXTech/SimpleFramework/blob/master/src/iTXTech/SimpleFramework/Framework.php)
+
+
+__An efficient, lightweight and easy to extend php command line framework.__
 
 Introduction
 -------------
-SimpleFramework is a php framework designed for small command line php programs (a module).<br>
+SimpleFramework is a php command line framework designed for small programs written in php.
+
 Here are some features:
 
-* Module dependency auto resolver
-* Logger and Scheduler system
-* Multi threading AsyncTask and Thread support
+* Module dependency resolver
+* Console & Command support
+* AsyncTask and Thread support
+* Network & Configuration utilities
+* All APIs can be used in a single script - *See examples*
 
 Contributions are welcomed.
-
-Manual
--------------
-__[Wiki](https://github.com/iTXTech/SimpleFramework/wiki)__
 
 Requirements
 -------------
 * PHP >= 7.2
-* Optional [pthreads](https://github.com/krakjoe/pthreads) extension (multi thread support)
-* Optional [yaml](https://github.com/php/pecl-file_formats-yaml) extension (yaml file parse)
+* [pthreads](https://github.com/krakjoe/pthreads) - *Optional*
+* [php-yaml](https://github.com/php/pecl-file_formats-yaml) - *Optional*
 
 Get SimpleFramework
 -------------
 * __[Releases](https://github.com/iTXTech/SimpleFramework/releases)__
-* __[PHP Runtime](https://itxtech.org/genisys/get/)__
 
 Modules
 -------------

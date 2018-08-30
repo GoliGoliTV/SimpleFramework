@@ -1,10 +1,8 @@
 <?php
 
-/**
- * SimpleFramework
- * The fast, light-weighted, easy-to-extend php framework.
+/*
  *
- * Some classes are based on project PocketMine-MP.
+ * SimpleFramework
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +11,7 @@
  *
  * @author iTXTech
  * @link https://itxtech.org
+ *
  */
 
 namespace iTXTech\SimpleFramework\Console;
@@ -45,7 +44,7 @@ abstract class Terminal{
 	public static $COLOR_YELLOW = "";
 	public static $COLOR_WHITE = "";
 
-	private static $formattingCodes = null;
+	public static $formattingCodes = null;
 
 	public static function hasFormattingCodes(){
 		if(self::$formattingCodes === null){

@@ -1,10 +1,8 @@
 <?php
 
-/**
- * SimpleFramework
- * The fast, light-weighted, easy-to-extend php framework.
+/*
  *
- * Some classes are based on project PocketMine-MP.
+ * SimpleFramework
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +11,7 @@
  *
  * @author iTXTech
  * @link https://itxtech.org
+ *
  */
 
 namespace iTXTech\SimpleFramework\Module;
@@ -34,7 +33,7 @@ class ModuleInfo{
 	private $website = null;
 	private $loadMethod;
 	private $loadOrder = self::LOAD_ORDER_DEFAULT;
-	private $dependency = [];
+	private $dependencies = [];
 
 	public function __construct(string $info, int $loadMethod){
 		$this->loadMethod = $loadMethod;
@@ -61,11 +60,14 @@ class ModuleInfo{
 		}
 		$this->website = $info["website"] ?? null;
 
-		$this->dependency = $info["dependency"] ?? [];
+		$this->dependencies = $info["dependencies"] ?? [];
+		if($this->dependencies === []){
+			$this->dependencies = $info["dependency"] ?? [];//backward compatibility
+		}
 	}
 
-	public function getDependency(): array{
-		return $this->dependency;
+	public function getDependencies(): array{
+		return $this->dependencies;
 	}
 
 	public function getLoadMethod(): int{

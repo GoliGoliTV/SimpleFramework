@@ -14,14 +14,7 @@
  *
  */
 
-namespace iTXTech\SimpleFramework\Console\Command;
+namespace iTXTech\SimpleFramework\Scheduler;
 
-interface Command{
-	public function getName(): string;
-
-	public function getUsage(): string;
-
-	public function getDescription(): string;
-
-	public function execute(string $command, array $args): bool;
+interface OnCompletionListener{
 }

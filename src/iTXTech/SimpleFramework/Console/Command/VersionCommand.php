@@ -1,10 +1,8 @@
 <?php
 
-/**
- * SimpleFramework
- * The fast, light-weighted, easy-to-extend php framework.
+/*
  *
- * Some classes are based on project PocketMine-MP.
+ * SimpleFramework
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,6 +11,7 @@
  *
  * @author iTXTech
  * @link https://itxtech.org
+ *
  */
 
 namespace iTXTech\SimpleFramework\Console\Command;
@@ -37,7 +36,7 @@ class VersionCommand implements Command{
 	public function execute(string $command, array $args) : bool{
 		if(count($args) > 0){
 			$module = $args[0];
-			$modules = Framework::getInstance()->getModules();
+			$modules = Framework::getInstance()->getModuleManager()->getModules();
 			if(isset($modules[$module])){
 				$module = $modules[$module];
 				Logger::info(TextFormat::YELLOW . "--------- " . TextFormat::WHITE . "Version: " . $module->getInfo()->getName() . TextFormat::YELLOW . " ---------");
